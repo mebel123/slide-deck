@@ -1,0 +1,76 @@
+body.dark-mode {
+    background: #121212;
+    color: #e0e0e0;
+}
+
+.dark-mode #app {
+    background: #1e1e1e;
+    border: 2px solid #444;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode #slide-container {
+    background: #222;
+}
+
+.dark-mode .slide {
+    background: #1e1e1e;
+}
+
+.dark-mode button {
+    background: #03a9f4;
+    color: #fff;
+}
+
+.dark-mode button:disabled {
+    background: #555;
+}
+
+.dark-mode .error {
+    color: #ff6b6b;
+}
+
+.dark-mode #editor-toggle {
+    background: #333;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.dark-mode #editor-toggle.active {
+    background: #fff;
+    color: #333;
+}
+
+.dark-mode .add-slide-btn {
+    background: #333;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.dark-mode .add-slide-btn:hover {
+    background: #fff;
+    color: #333;
+}
+
+.dark-mode .editable:hover {
+    border-color: #bbb;
+}
+
+.dark-mode .editable:focus {
+    background: rgba(3, 169, 244, 0.2);
+}
+
+.dark-mode .editable-image:hover {
+    box-shadow: 0 0 0 2px #03a9f4;
+}
+
+.dark-mode #download-button {
+    background: #333;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.dark-mode #download-button:hover {
+    background: #fff;
+    color: #333;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tiles</title>
+    <link rel="stylesheet" href="baseAndLight.css">
+    <link rel="stylesheet" href="dark.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+
+</head>
+<body style="overflow: hidden;">
+<div id="app">
+    <div id="slide-container"></div>
+    <button id="add-right" class="add-slide-btn add-right">+</button>
+    <button id="add-down" class="add-slide-btn add-down">+</button>
+    <div id="controls" class="controls">
+        <button id="prev-btn">Previous</button>
+        <button id="next-btn" class="next-btn">Next</button>
+    </div>
+</div>
+<!-- Zuerst die Daten laden -->
+<script src="slides-data-250129.js"></script>
+<!-- Dann das Hauptskript -->
+<script src="script.js"></script>
+</body>
+</html>
