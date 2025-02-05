@@ -1,12 +1,15 @@
 import { renderSlide } from './renderer.js';
 import { slidesData, getCurrentSlide, setCurrentSlide, getCurrentChildIndex, setCurrentChildIndex } from './slides.js';
+import {sendEvent} from "./wsclient";
 
 export function setupEventListeners() {
     document.addEventListener("keydown", (event) => {
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            sendEvent(event)
             setCurrentChildIndex(-1);
 
             if (event.key === "ArrowLeft") {
+
                 if (getCurrentSlide() > 0) {
                     setCurrentSlide(getCurrentSlide() - 1);
                     renderSlide(getCurrentSlide(), getCurrentChildIndex(), 'left');

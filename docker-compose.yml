@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  websocket-server:
+    build: ./server
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:latest
+    restart: always
+
+  client:
+    build: ./client
+    ports:
+      - "9001:80"
+    depends_on:
+      - websocket-server
