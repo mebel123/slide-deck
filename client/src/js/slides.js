@@ -54,3 +54,21 @@ export function addSlide(direction) {
         _currentChildIndex = slidesData[_currentSlide].childs.length - 1;
     }
 }
+
+export function downloadSlidesData() {
+    // Formatiere das slidesData Array als JavaScript-Code
+    const content = `const slideGroup = ${JSON.stringify(slidesData, null, 2)};`;
+    // Erstelle einen Blob mit dem JavaScript-Code
+    const blob = new Blob([content], { type: 'application/javascript' });
+    // Erstelle einen Download-Link
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'slides-data.js';
+    // Füge den Link zum DOM hinzu, klicke ihn und entferne ihn wieder
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    // Bereinige die URL
+    URL.revokeObjectURL(url);
+}

@@ -1,9 +1,11 @@
 import { renderSlide } from './renderer.js';
 import { slidesData, getCurrentSlide, setCurrentSlide, getCurrentChildIndex, setCurrentChildIndex } from './slides.js';
 import {sendEvent} from "./wsclient";
+import {isEditorMode} from "./editor";
 
 export function setupEventListeners() {
     document.addEventListener("keydown", (event) => {
+        if (isEditorMode) return;
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
             sendEvent(event)
             setCurrentChildIndex(-1);
