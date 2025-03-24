@@ -1,9 +1,25 @@
 import { renderSlide } from './renderer.js';
-import { slidesData, getCurrentSlide, setCurrentSlide, getCurrentChildIndex, setCurrentChildIndex } from './slides.js';
+import {
+    getCurrentSlide,
+    setCurrentSlide,
+    getCurrentChildIndex,
+    setCurrentChildIndex,
+    addSlide, getSlides
+} from './slides.js';
 import {sendEvent} from "./wsclient";
 import {isEditorMode} from "./editor";
 
 export function setupEventListeners() {
+
+    const btnAddRight = document.getElementById('add-right')
+    btnAddRight.addEventListener("click", (e) => {
+        addSlide("right")
+    })
+    const btnAddBottom = document.getElementById('add-down')
+    btnAddBottom.addEventListener("click", (e) => {
+        addSlide("down")
+    })
+
     document.addEventListener("keydown", (event) => {
         if (isEditorMode) return;
         if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
@@ -17,7 +33,8 @@ export function setupEventListeners() {
                     renderSlide(getCurrentSlide(), getCurrentChildIndex(), 'left');
                 }
             } else {
-                if (getCurrentSlide() < slidesData.length - 1) {
+                console.log('zeiger',getSlides(),getCurrentSlide(), getSlides.length - 1,(getCurrentSlide() < getSlides().length - 1))
+                if (getCurrentSlide() < getSlides().length - 1) {
                     setCurrentSlide(getCurrentSlide() + 1);
                     renderSlide(getCurrentSlide(), getCurrentChildIndex(), 'right');
                 }
@@ -25,7 +42,7 @@ export function setupEventListeners() {
         }
 
         if (event.key === "ArrowUp" || event.key === "ArrowDown") {
-            const currentSlideData = slidesData[getCurrentSlide()];
+            const currentSlideData = getSlides()[getCurrentSlide()];
             if (!currentSlideData.childs || currentSlideData.childs.length === 0) return;
 
             if (event.key === "ArrowUp") {

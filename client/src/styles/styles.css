@@ -499,3 +499,18 @@ body.dark-mode {
     background: #fff;
     color: #333;
 }
+
+a:visited {
+    color: deepskyblue;
+}
+
+/* quill */
+.ql-container {
+    min-height: unset !important; /* Standardhöhe entfernen */
+    height: auto !important; /* Höhe dynamisch anpassen */
+}
+.ql-editor {
+    min-height: unset !important;
+    height: auto !important;
+    padding: 5px; /* Optional: Abstand wie im ursprünglichen DIV */
+}

@@ -1,6 +1,22 @@
 import { slidesData } from './slides.js';
 import { makeEditable, makeImageEditable } from './editor.js';
 
+function addStyleFrom(ele, styleAsStr) {
+    if (!styleAsStr) return;
+    const style = JSON.parse(styleAsStr);
+
+    for (const property in style) {
+        ele.style[property] = style[property];
+    }
+}
+
+function convertContent(content) {
+    if (!content) return '';
+    content = content.replaceAll('\n','<br>')
+    // content = content.replace(/\n/g, '\n');
+    return content;
+}
+
 export function renderSlide(index, childIndex = -1, direction = 'none') {
     const slideContainer = document.getElementById("slide-container");
     const oldSlide = slideContainer.firstChild;
@@ -16,12 +32,19 @@ export function renderSlide(index, childIndex = -1, direction = 'none') {
     const title = document.createElement("div");
     title.innerHTML = slideData.title;
     title.classList.add("slide-title");
-    makeEditable(title, 'title', index, childIndex);
+
+
+    addStyleFrom(title,slideData.titleStyle)
+    // makeEditable(title, 'title', index, childIndex);
 
     const content = document.createElement("div");
-    content.innerHTML = slideData.content;
+
+    content.innerHTML = convertContent(slideData.content);
     content.classList.add("slide-content-content");
-    makeEditable(content, 'content', index, childIndex);
+    // makeEditable(content, 'content', index, childIndex);
+    setTimeout(() => makeEditable(title, 'title', index, childIndex), 0);
+    setTimeout(() => makeEditable(content, 'content', index, childIndex), 0);
+
 
     if (slideData.image) {
         const imageWrapper = document.createElement("div");

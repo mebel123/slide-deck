@@ -44,7 +44,8 @@ export async function loadSlides() {
 
 export function addSlide(direction) {
     if (direction === 'right') {
-        slidesData.splice(_currentSlide + 1, 0, createDefaultSlide());
+        //slidesData.splice(_currentSlide + 1, 0, createDefaultSlide());
+        slidesData.push(createDefaultSlide());
         _currentSlide++;
     } else if (direction === 'down') {
         if (!slidesData[_currentSlide].childs) {
@@ -53,6 +54,11 @@ export function addSlide(direction) {
         slidesData[_currentSlide].childs.push(createDefaultSlide());
         _currentChildIndex = slidesData[_currentSlide].childs.length - 1;
     }
+    console.log('slidesData',slidesData)
+}
+
+export function getSlides() {
+    return slidesData
 }
 
 export function downloadSlidesData() {
