@@ -1,6 +1,7 @@
 import { slidesData } from './slides.js';
-import { makeEditable, makeImageEditable } from './editor.js';
-
+import {getEditorMode, makeEditable, makeImageEditable} from './editor.js';
+import { sendPollAnswer } from './wsclient.js';
+import {smallFireworks} from "./effects";
 function addStyleFrom(ele, styleAsStr) {
     if (!styleAsStr) return;
     const style = JSON.parse(styleAsStr);
@@ -83,4 +84,33 @@ export function renderSlide(index, childIndex = -1, direction = 'none') {
     }
 
     slideContainer.appendChild(slideDiv);
+
+    if (!getEditorMode()) {
+        renderPollCanvas(slideDiv);
+        slideDiv.addEventListener('click', (e) => {
+            const answerEl = e.target.closest('.poll-answer');
+            if (answerEl && answerEl.closest('.poll-container')) {
+                const pollContainer = answerEl.closest('.poll-container');
+                const question = pollContainer.querySelector('.poll-question').textContent;
+                const selectedAnswer = answerEl.textContent;
+                const pollId = pollContainer.getAttribute('data-poll-id');
+                handlePollClick(pollId, question, selectedAnswer);
+            }
+        });
+    }
+}
+
+function renderPollCanvas(slideDiv) {
+    slideDiv.querySelectorAll('.poll-container').forEach(pollEl => {
+        const pollId = pollEl.getAttribute('data-poll-id');
+        const canvas = document.createElement('canvas');
+        canvas.id = `chart-${pollId}`;
+        pollEl.appendChild(canvas);
+    });
+}
+
+function handlePollClick(pollId, question, selectedAnswer) {
+    console.log(`Poll ID: ${pollId}, Frage: ${question}, Antwort: ${selectedAnswer}`);
+    smallFireworks();
+    sendPollAnswer(pollId, question, selectedAnswer);
 }

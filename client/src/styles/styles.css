@@ -217,6 +217,25 @@ img {
     width: 80%;
 }
 
+#create-session {
+    position: fixed;
+    bottom: 20px;
+    right: 80px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #333;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+
 /* Editor Mode Styles */
 #editor-toggle {
     position: fixed;
@@ -513,4 +532,40 @@ a:visited {
     min-height: unset !important;
     height: auto !important;
     padding: 5px; /* Optional: Abstand wie im ursprünglichen DIV */
+}
+
+.ql-poll::before {
+ content: "📊";
+}
+.poll-container {
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 5px;
+}
+
+.poll-container canvas {
+    padding: 20px;
+    max-height: 300px;
+}
+
+.poll-question {
+    color: #121212;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.dark-mode .poll-question {
+    color: lightblue;
+}
+.poll-answer {
+    color: black;
+    padding-left: 10px;
+    margin-bottom: 3px;
+}
+
+.dark-mode .poll-answer {
+    color: white;
 }
