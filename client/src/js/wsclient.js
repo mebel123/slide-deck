@@ -1,4 +1,5 @@
 import {fireworks} from "./effects";
+import {getConfig} from "./config";
 
 let ws = null;
 const CLIENT_ID = localStorage.getItem('clientId') || generateClientId();
@@ -60,7 +61,7 @@ function renderPollChart(pollId, question, results) {
 }
 
 export function initWebSocket() {
-    ws = new WebSocket("ws://127.0.0.1:3000");
+    ws = new WebSocket(getConfig().WS_URL);
     ws.onmessage = (event) => {
         console.log("Received message", event.data);
         const data = JSON.parse(event.data);

@@ -1,6 +1,7 @@
 import { renderSlide } from './renderer.js';
 import { slidesData, getCurrentSlide, getCurrentChildIndex } from './slides.js';
 import {isSet} from "./parameter";
+import {getConfig} from "./config";
 export let isEditorMode = false;
 const BlockEmbed = Quill.import('blots/block/embed');
 
@@ -60,7 +61,7 @@ export function setupEditor()    {
 }
 
 function createSession() {
-    fetch('http://localhost:4000/create-session', { method: 'POST' })
+    fetch(getConfig().SERVER_URL + '/create-session', { method: 'POST' })
         .then(res => res.json())
         .then(data => {
             const url = `${location.origin}${location.pathname}?session=${data.sessionId}`;
