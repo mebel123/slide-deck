@@ -9,7 +9,7 @@ services:
     depends_on:
       - redis
 
-  redis:
+  slide-deck_redis:
     image: redis:latest
     restart: always
 

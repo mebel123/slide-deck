@@ -4,9 +4,9 @@ const bodyParser = require('body-parser');
 const WebSocket = require("ws");
 const Redis = require("ioredis");
 
-const pub = new Redis({ host: "redis" });
-const sub = new Redis({ host: "redis" });
-const redis = new Redis({ host: "redis" });
+const pub = new Redis({ host: "slide-deck_redis" });
+const sub = new Redis({ host: "slide-deck_redis" });
+const redis = new Redis({ host: "slide-deck_redis" });
 
 const SESSION_TTL_SECONDS = 86400; // z.B. 24 Stunden
 
