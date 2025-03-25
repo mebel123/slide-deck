@@ -10,6 +10,7 @@ RUN npm install
 # Kopiere den Code und baue die Web-App mit Webpack
 COPY . .
 RUN npm run build
+COPY public/data /app/dist/data
 
 # 2. Schritt: Nginx als Webserver für das fertige Build verwenden
 FROM nginx:alpine
