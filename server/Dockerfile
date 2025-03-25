@@ -13,6 +13,7 @@ COPY . .
 
 # Exponiere den WebSocket-Port
 EXPOSE 3000
+EXPOSE 4000
 
 # Starte den WebSocket-Server
 CMD ["node", "server.js"]
