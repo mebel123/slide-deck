@@ -3,9 +3,8 @@ import {setSlidesData} from "./slides";
 
 export async function loadSlidesBySession() {
     const sessionId = new URLSearchParams(window.location.search).get('session');
-
+    let slidesData = [];
     if (sessionId) {
-        slidesData = [];
         const slidesUrl = `${getConfig().SERVER_URL}/slides/${sessionId}`;
         try {
             const response = await fetch(slidesUrl);
