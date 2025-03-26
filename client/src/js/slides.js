@@ -3,6 +3,10 @@ export let slidesData = [];
 let _currentSlide = 0;
 let _currentChildIndex = -1;
 
+export function setSlidesData(data) {
+    slidesData = data;
+}
+
 export function getCurrentSlide() {
     return _currentSlide;
 }

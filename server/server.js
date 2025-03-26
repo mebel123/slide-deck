@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const fs = require('fs-extra');
+const path = require('path');
 const WebSocket = require("ws");
 const Redis = require("ioredis");
 
@@ -14,11 +16,32 @@ const SESSION_TTL_SECONDS = 86400; // z.B. 24 Stunden
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+fs.ensureDirSync(path.join(__dirname, 'data'));
 
 app.post('/create-session', async (req, res) => {
+    const slidesData = req.body.slidesData;
+    if (!slidesData) {
+        return res.status(400).json({ error: 'missing slidesData' });
+    }
     const sessionId = generateSessionId();
     await redis.set(`session:${sessionId}`, 'active', 'EX', SESSION_TTL_SECONDS);
+
+    const sessionPath = path.join(__dirname, 'data', sessionId);
+    await fs.ensureDir(sessionPath);
+    await fs.writeJson(path.join(sessionPath, 'slides.json'), slidesData);
+
     res.json({ sessionId });
+});
+
+app.get('/slides/:sessionId', async (req, res) => {
+    const sessionId = req.params.sessionId;
+    const slidesFile = path.join(__dirname, 'data', sessionId, 'slides.json');
+
+    if (await fs.pathExists(slidesFile)) {
+        res.sendFile(slidesFile);
+    } else {
+        res.status(404).json({ error: 'missing slidesData' });
+    }
 });
 
 app.listen(4000, () => {

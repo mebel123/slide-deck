@@ -61,12 +61,18 @@ export function setupEditor()    {
 }
 
 function createSession() {
-    fetch(getConfig().SERVER_URL + '/create-session', { method: 'POST' })
+    fetch(getConfig().SERVER_URL + '/create-session', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({slidesData})
+    })
         .then(res => res.json())
         .then(data => {
             const url = `${location.origin}${location.pathname}?session=${data.sessionId}`;
-            console.log(`Session erstellt: ${url}`);
-        });
+            console.log(`Session created: ${url}`);
+        }).catch(err => {
+        console.error('Error on create session:', err);
+    });
 }
 
 export function toggleEditorMode() {
