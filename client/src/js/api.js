@@ -3,7 +3,6 @@ import {setSlidesData} from "./slides";
 
 export async function loadSlidesBySession() {
     const sessionId = new URLSearchParams(window.location.search).get('session');
-    let slidesData = [];
     if (sessionId) {
         const slidesUrl = `${getConfig().SERVER_URL}/slides/${sessionId}`;
         try {
@@ -11,12 +10,12 @@ export async function loadSlidesBySession() {
             if (!response.ok) {
                 console.error(Error('slides not found ' + slidesUrl));
             } else {
-                slidesData = await response.json();
+                const slidesData = await response.json();
+                setSlidesData(slidesData);
             }
-
         } catch (err) {
             console.error(err);
         }
     }
-    setSlidesData(slidesData);
+
 }
